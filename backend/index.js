@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve everything inside the frontend folder (HTML, CSS, JS, images)
-app.use(express.static(path.resolve(__dirname, '../frontend')));
+app.use(express.static(path.resolve(__dirname, '../frontend/public')));
 
 // Routes for specific pages
 app.get('/', (req, res) => {
