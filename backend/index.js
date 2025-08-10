@@ -1,25 +1,27 @@
-/**
- * 
- */
-const express = require('express')
+const express = require('express');
 const path = require('path');
-const app = express()
-const port = 3000
+const app = express();
 
-app.use(express.static(path.join(__dirname, "../frontend/public")))
+// Render provides the port in process.env.PORT
+const PORT = process.env.PORT || 3000;
 
-app.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname , '../frontend/index.html'))
+// Serve everything inside the frontend folder (HTML, CSS, JS, images)
+app.use(express.static(path.resolve(__dirname, '../frontend')));
+
+// Routes for specific pages
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/index.html'));
 });
 
-app.get('/software', (request, response) => {
-    response.sendFile(path.join(__dirname , '../frontend/software.html'))
+app.get('/software', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/software.html'));
 });
 
-app.get('/hardware', (request, response) => {
-    response.sendFile(path.join(__dirname , '../frontend/hardware.html'))
+app.get('/hardware', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/hardware.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${process.env.PORT || port}`)
-})
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
